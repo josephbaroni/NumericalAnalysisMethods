@@ -1,4 +1,4 @@
-# NumericalAnalysisMethods
+# Numerical Analysis Methods
 
 Some methods and solvers for basic numerical analysis. Contains:
 Numerical Integration methods,
