@@ -2,7 +2,6 @@ import numpy as np
 
 def divdif(xs,ys):
     """ Compute Newton divided differences table. """
-
     n = len(xs)
     dd = np.copy(ys).astype(float)
     for i in range(1, n):
@@ -11,7 +10,6 @@ def divdif(xs,ys):
 
 def dd_interp(xs,dd,t):
     """ Evaluate divided difference polynomial at points t. """
-
     n = len(xs)-1
     val = dd[n]
     for i in range(n-1,-1,-1):
@@ -53,25 +51,20 @@ def hermite_interp(xs, ys, dys, t):
 def cubic_spline(xs, ys):
     """Compute natural cubic spline coefficients."""
     n = len(xs) - 1
-    h = np.diff(xs)
-    
+    h = np.diff(xs)  
     # set up tridiagonal system for c coefficients
     A = np.zeros((n+1, n+1))
     b = np.zeros(n+1)
-    
     # Natural spline boundary conditions
     A[0, 0] = 1
-    A[n, n] = 1
-    
+    A[n, n] = 1  
     for i in range(1, n):
         A[i, i-1] = h[i-1]
         A[i, i] = 2 * (h[i-1] + h[i])
         A[i, i+1] = h[i]
         b[i] = 3 * ((ys[i+1] - ys[i]) / h[i] - (ys[i] - ys[i-1]) / h[i-1])
-    
     # Solve for c coefficients
     c = np.linalg.solve(A, b)
-    
     # compute b_i and d_i
     a = ys[:-1]
     b_ = np.zeros(n)
@@ -79,7 +72,6 @@ def cubic_spline(xs, ys):
     for i in range(n):
         b_[i] = (ys[i+1] - ys[i]) / h[i] - h[i] * (2*c[i] + c[i+1]) / 3
         d[i] = (c[i+1] - c[i]) / (3 * h[i])
-    
     return a, b_, c[:-1], d, xs
 
 def spline_eval(a, b, c, d, xs, t):
