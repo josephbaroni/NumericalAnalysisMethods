@@ -1,5 +1,6 @@
 import numpy as np
 
+# for solving (non-stiff) ODE's of the form y'(t) = f(t,y), y(t0)=y0
 
 # Forward Euler Method (Explicit)
 # solve y_{n+1} = y_n + h * f(t_n, y_n) 
